@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'com.apollographql.android'
+    id("com.apollographql.apollo").version("2.5.4")
 }
 
 android {
@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     viewBinding {
@@ -52,9 +52,12 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation 'com.localebro:okhttpprofiler:1.0.8'
-    implementation "com.apollographql.apollo:apollo-runtime:3.3.0"
+    // Apollo GraphQL
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+    // optional: for coroutines support
+    implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
 }
 
 apollo {
-    setOutputPackageName("com.example.androidinterview.apollo")
+    generateKotlinModels.set(true)
 }
